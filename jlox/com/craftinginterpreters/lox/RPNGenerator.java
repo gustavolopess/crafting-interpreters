@@ -9,17 +9,17 @@ public class RPNGenerator implements Expr.Visitor<String> {
 
     @Override
     public String visitBinaryExpr(Expr.Binary expr) {
-        return this.toRNP(expr.operator.lexeme, expr.left, expr.right);
+        return this.toRPN(expr.operator.lexeme, expr.left, expr.right);
     }
 
     @Override
     public String visitUnaryExpr(Expr.Unary expr) {
-        return this.toRNP(expr.operator.lexeme, expr.right);
+        return this.toRPN(expr.operator.lexeme, expr.right);
     }
 
     @Override
     public String visitGroupingExpr(Expr.Grouping expr) {
-        return this.toRNP(null, expr.expression);
+        return this.toRPN(null, expr.expression);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class RPNGenerator implements Expr.Visitor<String> {
         return expr.value.toString();
     }
 
-    private String toRNP(String operator, Expr... exprs) {
+    private String toRPN(String operator, Expr... exprs) {
         StringBuilder builder = new StringBuilder();
         
         for (int i = 0; i < exprs.length; i++) {
